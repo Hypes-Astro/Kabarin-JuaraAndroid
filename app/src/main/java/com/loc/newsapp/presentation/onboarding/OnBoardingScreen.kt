@@ -1,5 +1,6 @@
 package com.loc.newsapp.presentation.onboarding
 
+import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -36,7 +37,17 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OnBoardingScreen() {
+fun OnBoardingScreen(
+    onEvent: (OnBoardingEvent) -> Unit
+) {
+    val isSystemInDarkMode = isSystemInDarkTheme()
+    val systemUiColor = rememberSystemUiController()
+    SideEffect {
+        systemUiColor.setSystemBarsColor(
+            color = Color.Black.copy(0.1f),
+            darkIcons = isSystemInDarkMode
+        )
+    }
     Column(modifier = Modifier.fillMaxSize()) {
         val pagerState = rememberPagerState(initialPage = 0) {
             pages.size
@@ -89,9 +100,9 @@ fun OnBoardingScreen() {
                     text = buttonsState.value[1],
                     onClick = {
                         scope.launch {
-                            if (pagerState.currentPage == 3){
-                                //mengarahkan ke main screen dan menyimpan nilai di datastore
-                            }else{
+                            if (pagerState.currentPage == 2) {
+                                onEvent(OnBoardingEvent.SaveAppEntry)
+                            } else {
                                 pagerState.animateScrollToPage(
                                     page = pagerState.currentPage + 1
                                 )
