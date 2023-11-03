@@ -32,6 +32,9 @@ import com.loc.newsapp.domain.model.Source
 import com.loc.newsapp.presentation.Dimens.ArticleCardSize
 import com.loc.newsapp.presentation.Dimens.ExtraSmallPadding
 import com.loc.newsapp.presentation.Dimens.ExtraSmallPadding2
+import com.loc.newsapp.presentation.Dimens.MediumPadding1
+import com.loc.newsapp.presentation.Dimens.MediumPadding2
+import com.loc.newsapp.presentation.Dimens.MediumPadding3
 import com.loc.newsapp.presentation.Dimens.SmallIconSize
 import com.loc.newsapp.ui.theme.NewsAppTheme
 
@@ -55,10 +58,11 @@ fun ArticleCard(
             contentDescription = null,
             contentScale = ContentScale.Crop
         )
+
         Column(
             verticalArrangement = Arrangement.SpaceAround,
             modifier = Modifier
-                .padding(horizontal = ExtraSmallPadding)
+                .padding(horizontal = MediumPadding1)
                 .height(ArticleCardSize)
         ) {
             Text(
